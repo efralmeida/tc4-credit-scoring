@@ -1,0 +1,12 @@
+.venv/
+.vscode/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+data/
+pauta.md
+.github/copilot-instructions.md
+miscellaneous/
