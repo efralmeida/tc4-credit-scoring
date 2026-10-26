@@ -1,0 +1,76 @@
+{
+  "control_valid_passed": true,
+  "invalid_cases_rejected": 6,
+  "cases": [
+    {
+      "name": "dti_sentinela_999",
+      "rule": "DTI no intervalo [0, 100]",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [
+        "dti"
+      ],
+      "checks": [
+        "dti fora do intervalo [0, 100]"
+      ]
+    },
+    {
+      "name": "renda_nao_positiva",
+      "rule": "Renda anual estritamente positiva",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [
+        "annual_inc"
+      ],
+      "checks": [
+        "annual_inc deve ser estritamente positivo"
+      ]
+    },
+    {
+      "name": "prazo_fora_do_dominio",
+      "rule": "Dominio fechado de term",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [
+        "term"
+      ],
+      "checks": [
+        "term fora do dominio fechado"
+      ]
+    },
+    {
+      "name": "fico_nulo",
+      "rule": "Completude de FICO",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [
+        "fico_range_low"
+      ],
+      "checks": [
+        "not_nullable"
+      ]
+    },
+    {
+      "name": "contas_incoerentes",
+      "rule": "total_acc maior ou igual a open_acc",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [],
+      "checks": [
+        "total_acc deve ser maior ou igual a open_acc"
+      ]
+    },
+    {
+      "name": "coluna_extra_de_identificacao",
+      "rule": "Schema estrito sem identificadores",
+      "rejected": true,
+      "expected_signal_found": true,
+      "columns": [
+        "zip_code"
+      ],
+      "checks": [
+        "column_in_schema"
+      ]
+    }
+  ]
+}

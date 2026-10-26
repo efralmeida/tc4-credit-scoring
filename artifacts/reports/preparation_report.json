@@ -1,0 +1,43 @@
+{
+  "rows_read": 2260701,
+  "rows_eligible": 786818,
+  "rows_after_fractional_sample": 157363,
+  "rows_after_contract": 155752,
+  "rows_reference_sample": 80000,
+  "class_counts": {
+    "Fully Paid": 65232,
+    "Charged Off": 14768
+  },
+  "reference_window": {
+    "start": "2012-01-01",
+    "end": "2015-12-31"
+  },
+  "quarantine": {
+    "columns": [
+      "annual_inc",
+      "dti",
+      "mort_acc",
+      "pub_rec",
+      "revol_bal",
+      "revol_util"
+    ],
+    "checks": [
+      "annual_inc acima do teto de sanidade",
+      "dti fora do intervalo [0, 100]",
+      "mort_acc fora da faixa de sanidade",
+      "not_nullable",
+      "pub_rec fora da faixa de sanidade",
+      "revol_bal fora da faixa de sanidade",
+      "revol_util fora do intervalo [0, 200]"
+    ],
+    "failure_count": 1614,
+    "message": "Falha de contrato.",
+    "rejected_rows": 1611,
+    "accepted_rows": 155752
+  },
+  "privacy": {
+    "identifiers_excluded": true,
+    "post_origination_features_excluded": true,
+    "rejected_rows_persisted": false
+  }
+}

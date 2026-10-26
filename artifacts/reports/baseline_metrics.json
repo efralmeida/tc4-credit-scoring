@@ -1,0 +1,40 @@
+{
+  "metrics": {
+    "roc_auc": 0.6973904690771294,
+    "average_precision": 0.3469435464565657,
+    "ks": 0.29044282763423135,
+    "brier": 0.2191737981557144,
+    "positive_rate": 0.184625,
+    "n_train": 64000,
+    "n_test": 16000
+  },
+  "metadata": {
+    "model_type": "LogisticRegression",
+    "class_weight": "balanced",
+    "positive_class": "Charged Off",
+    "feature_columns": [
+      "loan_amnt",
+      "annual_inc",
+      "dti",
+      "delinq_2yrs",
+      "fico_range_low",
+      "inq_last_6mths",
+      "open_acc",
+      "pub_rec",
+      "revol_bal",
+      "revol_util",
+      "total_acc",
+      "mort_acc",
+      "pub_rec_bankruptcies",
+      "term",
+      "emp_length",
+      "home_ownership",
+      "verification_status",
+      "purpose",
+      "application_type"
+    ],
+    "trained_at": "2026-10-26T19:51:29.336205+00:00",
+    "decision_threshold": null,
+    "threshold_note": "O limiar de concessao e decisao de governanca e nao faz parte do baseline."
+  }
+}
