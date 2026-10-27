@@ -1,0 +1,75 @@
+{
+  "simulation": {
+    "source": "raw_window",
+    "window": {
+      "start": "2016-01-01",
+      "end": "2018-12-31"
+    },
+    "rows_read": 2260701,
+    "rows_eligible": 518706,
+    "rows_after_fractional_sample": 103743,
+    "rows_production_sample": 20000,
+    "quarantine": {
+      "columns": [
+        "annual_inc",
+        "dti",
+        "mort_acc",
+        "pub_rec",
+        "revol_util",
+        "total_acc"
+      ],
+      "checks": [
+        "annual_inc acima do teto de sanidade",
+        "annual_inc deve ser estritamente positivo",
+        "dti fora do intervalo [0, 100]",
+        "mort_acc fora da faixa de sanidade",
+        "not_nullable",
+        "pub_rec fora da faixa de sanidade",
+        "total_acc fora da faixa de sanidade"
+      ],
+      "failure_count": 386,
+      "message": "Falha de contrato.",
+      "rejected_rows": 309,
+      "accepted_rows": 103434
+    }
+  },
+  "injection": {
+    "intentional_columns": [
+      "fico_range_low",
+      "dti"
+    ],
+    "transformations": [
+      {
+        "column": "fico_range_low",
+        "operation": "additive_shift",
+        "delta": -40.0,
+        "clip": [
+          300.0,
+          850.0
+        ],
+        "business_meaning": "Queda do score FICO, perfil de credito pior.",
+        "mean_before": 697.919,
+        "mean_after": 657.919,
+        "rows_clipped": 0
+      },
+      {
+        "column": "dti",
+        "operation": "scale_and_shift",
+        "scale": 1.35,
+        "delta": 4.0,
+        "clip": [
+          0.0,
+          100.0
+        ],
+        "business_meaning": "Aumento do comprometimento de renda.",
+        "mean_before": 18.485115999999998,
+        "mean_after": 28.939407325,
+        "rows_clipped": 19
+      }
+    ],
+    "privacy": {
+      "row_level_values_persisted": false,
+      "identifiers_excluded": true
+    }
+  }
+}
