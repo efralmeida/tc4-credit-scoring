@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Governanca e LGPD do credit scoring</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 2rem auto; max-width: 980px; color: #1c1917; background: #faf7f2; }
+    table { width: 100%; border-collapse: collapse; background: white; font-size: 0.92rem; }
+    th, td { border-bottom: 1px solid #e7e5e4; text-align: left; padding: 0.35rem 0.4rem; vertical-align: top; }
+    .note { color: #44403c; }
+  </style>
+</head>
+<body>
+  <h1>Governanca, LGPD e analise causal</h1>
+  <p class="note">Fintech brasileira de credito. O dataset didatico e o Lending Club, publico e americano. O mapeamento LGPD nao cria titular brasileiro neste arquivo.</p>
+  <h2>Bases legais</h2>
+  <ul><li><strong>Analisar a proposta de credito.</strong> Execucao de contrato ou de procedimentos preliminares, art. 7, V, da LGPD So features disponiveis na concessao. Nao cobre monitoramento historico nem marketing.</li><li><strong>Atender dever de informacao e prevencao a fraude no credito.</strong> Obrigacao legal, art. 7, II, da LGPD, com o CDC, art. 43 Este baseline nao consulta biro e nao grava resultado em cadastro positivo. A Lei 12.414/2011 so entraria se houvesse esse cadastro.</li><li><strong>Monitorar qualidade, drift e saude do modelo.</strong> Legitimo interesse, art. 7, IX, da LGPD Agregados e faixas de score. Nao e base para conceder ou negar o credito do titular.</li></ul>
+  <p>O artefato grava decision_threshold nulo. O score ordena risco. Nao aprova nem nega. class_weight balanced tira a leitura do score como probabilidade real.</p>
+  <h2>O que nao entra</h2>
+  <table>
+    <thead><tr><th>Coluna</th><th>Classe</th><th>Dado sensivel</th><th>Decisao</th></tr></thead>
+    <tbody><tr><td>id</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>member_id</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>emp_title</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>url</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>desc</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>title</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>zip_code</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>addr_state</td><td>dado pessoal</td><td>nao</td><td>excluido na leitura</td></tr>
+<tr><td>int_rate</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>installment</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>grade</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>sub_grade</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>out_prncp</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>total_pymnt</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>recoveries</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>last_pymnt_amnt</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>last_fico_range_high</td><td>dado pessoal financeiro, se ligado ao titular</td><td>nao</td><td>excluido do modelo</td></tr>
+<tr><td>term</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>emp_length</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>home_ownership</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>verification_status</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>purpose</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>application_type</td><td>dado pessoal</td><td>nao</td><td>entra no baseline e no recorte de vies</td></tr>
+<tr><td>purpose=medical</td><td>nao e dado de saude</td><td>nao</td><td>categoria de purpose, nao dado sensivel</td></tr></tbody>
+  </table>
+  <h2>Retencao</h2>
+  <table>
+    <thead><tr><th>Artefato</th><th>Git</th><th>Prazo no cenario</th></tr></thead>
+    <tbody><tr><td>CSV bruto do Lending Club</td><td>ignorado</td><td>cinco anos apos o fim da relacao de credito, depois apagar ou anonimizar</td></tr>
+<tr><td>Amostras de referencia e producao</td><td>ignorado</td><td>igual ao bruto</td></tr>
+<tr><td>Modelo e coeficientes agregados</td><td>versionado</td><td>vida do modelo mais cinco anos, para explicar decisao passada</td></tr>
+<tr><td>Relatorios JSON e HTML agregados</td><td>versionado, sem publicacao externa do HTML</td><td>cinco anos</td></tr>
+<tr><td>Log de lote</td><td>versionado</td><td>cinco anos</td></tr>
+<tr><td>Log de evento de predicao</td><td>ignorado</td><td>noventa dias</td></tr>
+<tr><td>Payload rejeitado pelo contrato</td><td>nao se aplica</td><td>zero</td></tr></tbody>
+  </table>
+  <h2>Vies</h2>
+  <p class="note">O modelo nao usa atributo protegido. O sinal abaixo compara massa de score. Nao e concessao e nao e laudo de discriminacao.</p>
+  <ul><li>term / 60 months: impacto desproporcional 0.19 contra 36 months.</li><li>emp_length / unknown: impacto desproporcional 0.64 contra 10+ years.</li><li>home_ownership / RENT: impacto desproporcional 0.74 contra MORTGAGE.</li><li>verification_status / Verified: impacto desproporcional 0.78 contra Source Verified.</li><li>purpose / small_business: impacto desproporcional 0.46 contra debt_consolidation.</li><li>application_type / Joint App: impacto desproporcional 0.79 contra Individual.</li></ul>
+  <h2>Analise causal</h2>
+  <p>Intervencao: score medio de 0.449 para 0.607. PSI do score 0.791. Variacao do rotulo 0.000. O prediction drift deste contraste e causado pela queda de FICO e pela alta de DTI. O rotulo nao mudou, entao o contraste nao e concept drift.</p>
+  <p>Janela real: default de 0.185 para 0.225. Efeito de composicao -0.007. Efeito de taxa 0.047. Residuo 0.000. Da para localizar o aumento do default na taxa dentro da faixa de score. Nao da para apontar um unico fator externo como causa.</p>
+  <p class="note">Efeito de taxa e mudanca de P(Y|faixa de score): o sinal de concept drift. Efeito de composicao e migracao entre faixas. Nenhum dos dois nomeia a causa externa.</p>
+</body>
+</html>

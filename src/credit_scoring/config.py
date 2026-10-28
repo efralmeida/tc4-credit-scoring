@@ -1,4 +1,4 @@
-"""Constantes de dados, contratos e artefatos das etapas 1 e 2."""
+"""Constantes de dados, contratos e artefatos das etapas 1 a 4."""
 
 from pathlib import Path
 
@@ -30,6 +30,27 @@ DRIFT_REPORT_PATH = ROOT / "artifacts" / "reports" / "drift_report.html"
 DRIFT_INJECTION_REPORT_PATH = ROOT / "artifacts" / "reports" / "drift_injection_report.html"
 DRIFT_SUMMARY_PATH = ROOT / "artifacts" / "reports" / "drift_summary.json"
 PRODUCTION_SIMULATION_PATH = ROOT / "artifacts" / "reports" / "production_simulation.json"
+LOGS_DIR = ROOT / "artifacts" / "logs"
+PREDICTION_LOG_PATH = LOGS_DIR / "prediction_events.jsonl"
+PREDICTION_LOG_SAMPLE_PATH = LOGS_DIR / "prediction_events_sample.jsonl"
+BATCH_HEALTH_LOG_PATH = LOGS_DIR / "batch_health.jsonl"
+HEALTH_SUMMARY_PATH = ROOT / "artifacts" / "reports" / "health_summary.json"
+OBSERVABILITY_REPORT_PATH = ROOT / "artifacts" / "reports" / "observability_report.html"
+GOVERNANCE_REPORT_PATH = ROOT / "artifacts" / "reports" / "governance_report.json"
+GOVERNANCE_HTML_PATH = ROOT / "artifacts" / "reports" / "governance_report.html"
+# Lote pequeno demais deixa o PSI instavel. Abaixo disso o lote e logado,
+# mas nao pagina alerta de drift.
+MIN_BATCH_DRIFT_ROWS = 200
+INCIDENT_BATCH_ROWS = 2_000
+CONTRACT_PROBE_ROWS = 40
+# Corte so de monitoramento. Nao e limiar de concessao de credito.
+FAIRNESS_SCORE_CUTOFF = 0.50
+FAIRNESS_MIN_GROUP_SIZE = 200
+FAIRNESS_DISPARATE_IMPACT = 0.80
+# Latencia media por linha acima deste valor pagina o lote. A regressao
+# logistica fica muito abaixo; o limiar existe para o indicador ter regra.
+LATENCY_MS_PER_ROW_ALERT = 50.0
+PREDICTION_LOG_SAMPLE_SIZE = 5
 # Recorte usado so no HTML do Evidently. PSI e KS usam a amostra inteira.
 EVIDENTLY_SAMPLE_SIZE = 10_000
 # PSI de credito: abaixo de 0,10 a populacao e considerada estavel;

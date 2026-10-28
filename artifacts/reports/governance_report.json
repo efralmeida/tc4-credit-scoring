@@ -1,0 +1,1476 @@
+{
+  "privacy": {
+    "scenario": "Fintech brasileira de credito. O dataset didatico e o Lending Club, publico e americano. O mapeamento LGPD nao cria titular brasileiro neste arquivo.",
+    "sensitive_personal_data_in_model": false,
+    "catalog": [
+      {
+        "column": "id",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "member_id",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "emp_title",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "url",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "desc",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "title",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "zip_code",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "addr_state",
+        "class": "identificador ou proxy direto",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido na leitura",
+        "reason": "Minimizacao. Nao e necessario ao baseline e aumenta reidentificacao."
+      },
+      {
+        "column": "int_rate",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "installment",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "grade",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "sub_grade",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "out_prncp",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "total_pymnt",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "recoveries",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "last_pymnt_amnt",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "last_fico_range_high",
+        "class": "vazamento ou pos-concessao",
+        "lgpd": "dado pessoal financeiro, se ligado ao titular",
+        "sensitive_personal_data": "nao",
+        "decision": "excluido do modelo",
+        "reason": "Nao existe no momento da concessao, ou vaza o desfecho."
+      },
+      {
+        "column": "loan_amnt",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "annual_inc",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "dti",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "delinq_2yrs",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "fico_range_low",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "inq_last_6mths",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "open_acc",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "pub_rec",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "revol_bal",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "revol_util",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "total_acc",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "mort_acc",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "pub_rec_bankruptcies",
+        "class": "feature de concessao",
+        "lgpd": "dado pessoal financeiro",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline",
+        "reason": "Dado pessoal financeiro quando ligado a uma pessoa. Na tabela de modelagem nao ha identificador direto, mas o cruzamento com o bruto reidentificaria. Por isso o bruto fica fora do Git e fora do log."
+      },
+      {
+        "column": "term",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "emp_length",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "home_ownership",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "verification_status",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "purpose",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "application_type",
+        "class": "feature categorica",
+        "lgpd": "dado pessoal",
+        "sensitive_personal_data": "nao",
+        "decision": "entra no baseline e no recorte de vies",
+        "reason": "Nao e dado pessoal sensivel. Pode funcionar como proxy socioeconomico e entra no monitoramento de vies, nao como atributo protegido."
+      },
+      {
+        "column": "purpose=medical",
+        "class": "finalidade declarada do emprestimo",
+        "lgpd": "nao e dado de saude",
+        "sensitive_personal_data": "nao",
+        "decision": "categoria de purpose, nao dado sensivel",
+        "reason": "Art. 5, II, da LGPD fala de dado de saude da pessoa. A categoria medical diz para que o dinheiro foi pedido, nao um diagnostico."
+      }
+    ],
+    "legal_bases": [
+      {
+        "purpose": "Analisar a proposta de credito",
+        "basis": "Execucao de contrato ou de procedimentos preliminares, art. 7, V, da LGPD",
+        "limit": "So features disponiveis na concessao. Nao cobre monitoramento historico nem marketing."
+      },
+      {
+        "purpose": "Atender dever de informacao e prevencao a fraude no credito",
+        "basis": "Obrigacao legal, art. 7, II, da LGPD, com o CDC, art. 43",
+        "limit": "Este baseline nao consulta biro e nao grava resultado em cadastro positivo. A Lei 12.414/2011 so entraria se houvesse esse cadastro."
+      },
+      {
+        "purpose": "Monitorar qualidade, drift e saude do modelo",
+        "basis": "Legitimo interesse, art. 7, IX, da LGPD",
+        "limit": "Agregados e faixas de score. Nao e base para conceder ou negar o credito do titular."
+      }
+    ],
+    "legitimate_interest_test": {
+      "purpose": "Detectar dado invalido e populacao diferente da de treino.",
+      "necessity": "Sem agregado de volume, erro, latencia e PSI, a degradacao passa em silencio.",
+      "balance": "O log nao leva identificador, nao leva feature e nao leva a linha rejeitada. O evento de predicao guarda faixa de score e um id aleatorio. O acesso fica com quem opera o pipeline.",
+      "conclusion": "O legitimo interesse sustenta o monitoramento. Nao sustenta a decisao de credito, que depende do art. 7, V, e, se for automatizada, do art. 20."
+    },
+    "automated_decision": {
+      "article": "Art. 20 da LGPD e art. 43 do CDC",
+      "current_behavior": "O artefato grava decision_threshold nulo. O score ordena risco. Nao aprova nem nega. class_weight balanced tira a leitura do score como probabilidade real.",
+      "if_used_in_production": "A concessao precisaria de criterio escrito, revisao humana pedida pelo titular e explicacao da decisao. Coeficiente agregado explica o modelo, nao o caso concreto.",
+      "rights": "Acesso, correcao, informacao sobre compartilhamento e revisao da decisao. Eliminacao quando a retencao nao tiver mais base. O canal e o encarregado indicado no registro de operacoes da fintech."
+    }
+  },
+  "retention": {
+    "deletes_files": false,
+    "controller": "No cenario, a fintech e a controladora. Neste repositorio, nao ha tratamento de titular brasileiro.",
+    "schedule": [
+      {
+        "artifact": "CSV bruto do Lending Club",
+        "path": "data/raw",
+        "personal_data": "financeiro identificavel na origem",
+        "git": "ignorado",
+        "repository_retention": "so enquanto o trabalho precisar ser reproduzido",
+        "scenario_retention": "cinco anos apos o fim da relacao de credito, depois apagar ou anonimizar",
+        "basis": "Obrigacao legal e exercicio de direitos, arts. 15 e 16 da LGPD",
+        "deletion": "apagar o arquivo local; nao ha copia no Git"
+      },
+      {
+        "artifact": "Amostras de referencia e producao",
+        "path": "data/processed",
+        "personal_data": "minimizado, ainda reidentificavel se cruzado com o bruto",
+        "git": "ignorado",
+        "repository_retention": "igual ao bruto",
+        "scenario_retention": "igual ao bruto",
+        "basis": "Execucao de contrato para a amostra de concessao; legitimo interesse para o monitor",
+        "deletion": "apagar os CSV locais"
+      },
+      {
+        "artifact": "Modelo e coeficientes agregados",
+        "path": "artifacts/models e baseline_coefficients.csv",
+        "personal_data": "nenhum dado de linha",
+        "git": "versionado",
+        "repository_retention": "enquanto o relatorio do trabalho existir",
+        "scenario_retention": "vida do modelo mais cinco anos, para explicar decisao passada",
+        "basis": "Accountability, art. 6, X, e revisao do art. 20",
+        "deletion": "arquivar o binario com a versao; nao reconstruir a base a partir dele"
+      },
+      {
+        "artifact": "Relatorios JSON e HTML agregados",
+        "path": "artifacts/reports",
+        "personal_data": "agregado; o HTML do Evidently pode embutir amostra ja minimizada",
+        "git": "versionado, sem publicacao externa do HTML",
+        "repository_retention": "entrega do trabalho",
+        "scenario_retention": "cinco anos",
+        "basis": "Accountability do monitoramento",
+        "deletion": "nao publicar o HTML fora do repositorio; nao extrair linha dele"
+      },
+      {
+        "artifact": "Log de lote",
+        "path": "artifacts/logs/batch_health.jsonl",
+        "personal_data": "agregado",
+        "git": "versionado",
+        "repository_retention": "entrega do trabalho",
+        "scenario_retention": "cinco anos",
+        "basis": "Legitimo interesse do monitoramento",
+        "deletion": "substituir na nova execucao; nao ha linha de cliente"
+      },
+      {
+        "artifact": "Log de evento de predicao",
+        "path": "artifacts/logs/prediction_events.jsonl",
+        "personal_data": "microdado operacional: faixa de score e id aleatorio",
+        "git": "ignorado",
+        "repository_retention": "noventa dias",
+        "scenario_retention": "noventa dias",
+        "basis": "Legitimo interesse, pelo teste de balanceamento",
+        "deletion": "apagar o JSONL; o id nao permite achar o titular"
+      },
+      {
+        "artifact": "Payload rejeitado pelo contrato",
+        "path": "nao persistido",
+        "personal_data": "seria dado pessoal, por isso nao e gravado",
+        "git": "nao se aplica",
+        "repository_retention": "zero",
+        "scenario_retention": "zero",
+        "basis": "Minimizacao, art. 6, III",
+        "deletion": "nao chega a existir como arquivo"
+      }
+    ]
+  },
+  "bias": {
+    "reference": {
+      "cutoff": 0.5,
+      "cutoff_meaning": "Corte de monitoramento. Score abaixo dele e tratado como desfecho favoravel so para comparar grupos. Nao e aprovacao.",
+      "disparate_impact_threshold": 0.8,
+      "min_group_size": 200,
+      "protected_attributes_in_model": false,
+      "excluded_geographic_proxy": [
+        "zip_code",
+        "addr_state"
+      ],
+      "slices": [
+        {
+          "column": "term",
+          "reference_group": "36 months",
+          "groups": [
+            {
+              "group": "36 months",
+              "rows": 59892,
+              "score_mean": 0.39621185412423143,
+              "favorable_share": 0.7801208842583317,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.1391671675682896,
+              "reference_group": true
+            },
+            {
+              "group": "60 months",
+              "rows": 20108,
+              "score_mean": 0.6540171439097671,
+              "favorable_share": 0.11522777004177442,
+              "disparate_impact": 0.14770501901294766,
+              "observed_default_rate": 0.3199224189377362,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "term",
+              "group": "60 months",
+              "reference_group": "36 months",
+              "disparate_impact": 0.14770501901294766,
+              "rows": 20108,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "emp_length",
+          "reference_group": "10+ years",
+          "groups": [
+            {
+              "group": "10+ years",
+              "rows": 26442,
+              "score_mean": 0.4452616354157715,
+              "favorable_share": 0.6441267680205733,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.177634067014598,
+              "reference_group": true
+            },
+            {
+              "group": "2 years",
+              "rows": 7119,
+              "score_mean": 0.44638728718995263,
+              "favorable_share": 0.6521983424638292,
+              "disparate_impact": 1.012531034019996,
+              "observed_default_rate": 0.17376035960106756,
+              "reference_group": false
+            },
+            {
+              "group": "< 1 year",
+              "rows": 6271,
+              "score_mean": 0.467339260314208,
+              "favorable_share": 0.6093127092967628,
+              "disparate_impact": 0.9459515417581613,
+              "observed_default_rate": 0.18625418593525753,
+              "reference_group": false
+            },
+            {
+              "group": "3 years",
+              "rows": 6246,
+              "score_mean": 0.46425672772213444,
+              "favorable_share": 0.60646813960935,
+              "disparate_impact": 0.9415353773808379,
+              "observed_default_rate": 0.1829971181556196,
+              "reference_group": false
+            },
+            {
+              "group": "1 year",
+              "rows": 5143,
+              "score_mean": 0.47036884819542046,
+              "favorable_share": 0.6076220104997083,
+              "disparate_impact": 0.9433267497436172,
+              "observed_default_rate": 0.1928835310130274,
+              "reference_group": false
+            },
+            {
+              "group": "5 years",
+              "rows": 4853,
+              "score_mean": 0.45186915899848984,
+              "favorable_share": 0.6420770657325365,
+              "disparate_impact": 0.9968178588597775,
+              "observed_default_rate": 0.17988872862147126,
+              "reference_group": false
+            },
+            {
+              "group": "4 years",
+              "rows": 4640,
+              "score_mean": 0.4673573805233567,
+              "favorable_share": 0.6023706896551724,
+              "disparate_impact": 0.9351741296302294,
+              "observed_default_rate": 0.1810344827586207,
+              "reference_group": false
+            },
+            {
+              "group": "7 years",
+              "rows": 4166,
+              "score_mean": 0.45343905653570576,
+              "favorable_share": 0.6399423907825252,
+              "disparate_impact": 0.9935037985598598,
+              "observed_default_rate": 0.18098895823331734,
+              "reference_group": false
+            },
+            {
+              "group": "unknown",
+              "rows": 4149,
+              "score_mean": 0.5438098376287951,
+              "favorable_share": 0.3728609303446614,
+              "disparate_impact": 0.5788626538382772,
+              "observed_default_rate": 0.23716558206796817,
+              "reference_group": false
+            },
+            {
+              "group": "8 years",
+              "rows": 4059,
+              "score_mean": 0.473991425869114,
+              "favorable_share": 0.5875831485587583,
+              "disparate_impact": 0.9122166283578373,
+              "observed_default_rate": 0.1904409953190441,
+              "reference_group": false
+            },
+            {
+              "group": "6 years",
+              "rows": 3781,
+              "score_mean": 0.46371635221244045,
+              "favorable_share": 0.616239090187781,
+              "disparate_impact": 0.9567046748911053,
+              "observed_default_rate": 0.18698756942607775,
+              "reference_group": false
+            },
+            {
+              "group": "9 years",
+              "rows": 3131,
+              "score_mean": 0.4777779307918966,
+              "favorable_share": 0.5723411050782498,
+              "disparate_impact": 0.8885535169374753,
+              "observed_default_rate": 0.1916320664324497,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "emp_length",
+              "group": "unknown",
+              "reference_group": "10+ years",
+              "disparate_impact": 0.5788626538382772,
+              "rows": 4149,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "home_ownership",
+          "reference_group": "MORTGAGE",
+          "groups": [
+            {
+              "group": "MORTGAGE",
+              "rows": 40110,
+              "score_mean": 0.4192374909835652,
+              "favorable_share": 0.6927948142607828,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.16035901271503367,
+              "reference_group": true
+            },
+            {
+              "group": "RENT",
+              "rows": 31915,
+              "score_mean": 0.5094497905338202,
+              "favorable_share": 0.5204449318502271,
+              "disparate_impact": 0.7512252129161009,
+              "observed_default_rate": 0.21278395738680872,
+              "reference_group": false
+            },
+            {
+              "group": "OWN",
+              "rows": 7969,
+              "score_mean": 0.4773128088321776,
+              "favorable_share": 0.5820052704228887,
+              "disparate_impact": 0.840083179669716,
+              "observed_default_rate": 0.19375078428912035,
+              "reference_group": false
+            },
+            {
+              "group": "OTHER",
+              "rows": 5,
+              "score_mean": 0.3703853811455048,
+              "favorable_share": 0.8,
+              "disparate_impact": 1.1547430545559236,
+              "observed_default_rate": 0.2,
+              "reference_group": false
+            },
+            {
+              "group": "NONE",
+              "rows": 1,
+              "score_mean": 0.6335682190400113,
+              "favorable_share": 0.0,
+              "disparate_impact": 0.0,
+              "observed_default_rate": 0.0,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "home_ownership",
+              "group": "RENT",
+              "reference_group": "MORTGAGE",
+              "disparate_impact": 0.7512252129161009,
+              "rows": 31915,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "verification_status",
+          "reference_group": "Source Verified",
+          "groups": [
+            {
+              "group": "Source Verified",
+              "rows": 30508,
+              "score_mean": 0.4825938519911846,
+              "favorable_share": 0.5635243214894454,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.19853808837026354,
+              "reference_group": true
+            },
+            {
+              "group": "Verified",
+              "rows": 26454,
+              "score_mean": 0.5050324794754888,
+              "favorable_share": 0.4999243970666062,
+              "disparate_impact": 0.8871389893966973,
+              "observed_default_rate": 0.21104558856883648,
+              "reference_group": false
+            },
+            {
+              "group": "Not Verified",
+              "rows": 23038,
+              "score_mean": 0.3818818755254115,
+              "favorable_share": 0.8083601007031861,
+              "disparate_impact": 1.4344724262594695,
+              "observed_default_rate": 0.13577567497178575,
+              "reference_group": false
+            }
+          ],
+          "signals": []
+        },
+        {
+          "column": "purpose",
+          "reference_group": "debt_consolidation",
+          "groups": [
+            {
+              "group": "debt_consolidation",
+              "rows": 47764,
+              "score_mean": 0.4792249992339949,
+              "favorable_share": 0.5746378025291015,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.19665438405493676,
+              "reference_group": true
+            },
+            {
+              "group": "credit_card",
+              "rows": 18776,
+              "score_mean": 0.41646673450120864,
+              "favorable_share": 0.7202812100553898,
+              "disparate_impact": 1.2534525345970648,
+              "observed_default_rate": 0.1549850873455475,
+              "reference_group": false
+            },
+            {
+              "group": "home_improvement",
+              "rows": 4728,
+              "score_mean": 0.4258900205139989,
+              "favorable_share": 0.6719543147208121,
+              "disparate_impact": 1.169352784942794,
+              "observed_default_rate": 0.16645516074450084,
+              "reference_group": false
+            },
+            {
+              "group": "other",
+              "rows": 3760,
+              "score_mean": 0.4850486374684881,
+              "favorable_share": 0.5460106382978723,
+              "disparate_impact": 0.9501822467905262,
+              "observed_default_rate": 0.19414893617021275,
+              "reference_group": false
+            },
+            {
+              "group": "major_purchase",
+              "rows": 1441,
+              "score_mean": 0.4126761569389955,
+              "favorable_share": 0.703678001387925,
+              "disparate_impact": 1.2245591889202043,
+              "observed_default_rate": 0.1693268563497571,
+              "reference_group": false
+            },
+            {
+              "group": "small_business",
+              "rows": 763,
+              "score_mean": 0.592086272487482,
+              "favorable_share": 0.26605504587155965,
+              "disparate_impact": 0.46299607283160904,
+              "observed_default_rate": 0.26605504587155965,
+              "reference_group": false
+            },
+            {
+              "group": "medical",
+              "rows": 721,
+              "score_mean": 0.45722328644329985,
+              "favorable_share": 0.624133148404993,
+              "disparate_impact": 1.0861331183887524,
+              "observed_default_rate": 0.17753120665742025,
+              "reference_group": false
+            },
+            {
+              "group": "car",
+              "rows": 664,
+              "score_mean": 0.419055384166903,
+              "favorable_share": 0.6882530120481928,
+              "disparate_impact": 1.1977162118799825,
+              "observed_default_rate": 0.15060240963855423,
+              "reference_group": false
+            },
+            {
+              "group": "moving",
+              "rows": 461,
+              "score_mean": 0.5195498461165708,
+              "favorable_share": 0.4164859002169197,
+              "disparate_impact": 0.7247798498182297,
+              "observed_default_rate": 0.22559652928416485,
+              "reference_group": false
+            },
+            {
+              "group": "vacation",
+              "rows": 439,
+              "score_mean": 0.46291612698551365,
+              "favorable_share": 0.5990888382687927,
+              "disparate_impact": 1.0425503432459142,
+              "observed_default_rate": 0.17084282460136674,
+              "reference_group": false
+            },
+            {
+              "group": "house",
+              "rows": 301,
+              "score_mean": 0.5142820333127532,
+              "favorable_share": 0.4750830564784053,
+              "disparate_impact": 0.8267521809172059,
+              "observed_default_rate": 0.2059800664451827,
+              "reference_group": false
+            },
+            {
+              "group": "wedding",
+              "rows": 129,
+              "score_mean": 0.45062737429948513,
+              "favorable_share": 0.6511627906976745,
+              "disparate_impact": 1.1331708213970095,
+              "observed_default_rate": 0.17829457364341086,
+              "reference_group": false
+            },
+            {
+              "group": "renewable_energy",
+              "rows": 52,
+              "score_mean": 0.4539909307103357,
+              "favorable_share": 0.6346153846153846,
+              "disparate_impact": 1.1043745848642557,
+              "observed_default_rate": 0.17307692307692307,
+              "reference_group": false
+            },
+            {
+              "group": "educational",
+              "rows": 1,
+              "score_mean": 0.6149894825643774,
+              "favorable_share": 0.0,
+              "disparate_impact": 0.0,
+              "observed_default_rate": 0.0,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "purpose",
+              "group": "moving",
+              "reference_group": "debt_consolidation",
+              "disparate_impact": 0.7247798498182297,
+              "rows": 461,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            },
+            {
+              "column": "purpose",
+              "group": "small_business",
+              "reference_group": "debt_consolidation",
+              "disparate_impact": 0.46299607283160904,
+              "rows": 763,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "application_type",
+          "reference_group": "Individual",
+          "groups": [
+            {
+              "group": "Individual",
+              "rows": 79958,
+              "score_mean": 0.46096531317658485,
+              "favorable_share": 0.6131218889917206,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.18453438054978863,
+              "reference_group": true
+            },
+            {
+              "group": "Joint App",
+              "rows": 42,
+              "score_mean": 0.5483949041118378,
+              "favorable_share": 0.38095238095238093,
+              "disparate_impact": 0.6213322143478802,
+              "observed_default_rate": 0.30952380952380953,
+              "reference_group": false
+            }
+          ],
+          "signals": []
+        }
+      ],
+      "signals": [
+        {
+          "column": "term",
+          "group": "60 months",
+          "reference_group": "36 months",
+          "disparate_impact": 0.14770501901294766,
+          "rows": 20108,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "emp_length",
+          "group": "unknown",
+          "reference_group": "10+ years",
+          "disparate_impact": 0.5788626538382772,
+          "rows": 4149,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "home_ownership",
+          "group": "RENT",
+          "reference_group": "MORTGAGE",
+          "disparate_impact": 0.7512252129161009,
+          "rows": 31915,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "purpose",
+          "group": "moving",
+          "reference_group": "debt_consolidation",
+          "disparate_impact": 0.7247798498182297,
+          "rows": 461,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "purpose",
+          "group": "small_business",
+          "reference_group": "debt_consolidation",
+          "disparate_impact": 0.46299607283160904,
+          "rows": 763,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        }
+      ],
+      "mitigation": [
+        "Sexo, raca, idade, religiao, biometria, CEP e UF nao entram no modelo.",
+        "addr_state ficou de fora. Nao volta nesta etapa: o ganho de AUC nao justifica o proxy geografico.",
+        "O baseline nao tem limiar. Qualquer corte de concessao e politica, com revisao humana.",
+        "class_weight balanced melhora o ranking da classe rara. Nao e tecnica de equidade.",
+        "FICO e renda podem carregar vies historico. Excluir a UF nao remove esse residuo.",
+        "O recorte e recalculado na referencia e na producao natural. Sinal novo na producao vira item de revisao, nao bloqueio automatico do cliente."
+      ]
+    },
+    "natural_production": {
+      "cutoff": 0.5,
+      "cutoff_meaning": "Corte de monitoramento. Score abaixo dele e tratado como desfecho favoravel so para comparar grupos. Nao e aprovacao.",
+      "disparate_impact_threshold": 0.8,
+      "min_group_size": 200,
+      "protected_attributes_in_model": false,
+      "excluded_geographic_proxy": [
+        "zip_code",
+        "addr_state"
+      ],
+      "slices": [
+        {
+          "column": "term",
+          "reference_group": "36 months",
+          "groups": [
+            {
+              "group": "36 months",
+              "rows": 15545,
+              "score_mean": 0.3932306617533091,
+              "favorable_share": 0.7767770987455773,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.19401736892891605,
+              "reference_group": true
+            },
+            {
+              "group": "60 months",
+              "rows": 4455,
+              "score_mean": 0.642163292091091,
+              "favorable_share": 0.14433221099887766,
+              "disparate_impact": 0.18580904513271665,
+              "observed_default_rate": 0.33108866442199775,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "term",
+              "group": "60 months",
+              "reference_group": "36 months",
+              "disparate_impact": 0.18580904513271665,
+              "rows": 4455,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "emp_length",
+          "reference_group": "10+ years",
+          "groups": [
+            {
+              "group": "10+ years",
+              "rows": 6713,
+              "score_mean": 0.42706279692831095,
+              "favorable_share": 0.6859824221659466,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.1924623864144198,
+              "reference_group": true
+            },
+            {
+              "group": "2 years",
+              "rows": 1836,
+              "score_mean": 0.4477071070907818,
+              "favorable_share": 0.6416122004357299,
+              "disparate_impact": 0.9353187191151042,
+              "observed_default_rate": 0.23202614379084968,
+              "reference_group": false
+            },
+            {
+              "group": "< 1 year",
+              "rows": 1742,
+              "score_mean": 0.45308903102298687,
+              "favorable_share": 0.6371986222732492,
+              "disparate_impact": 0.9288847668448039,
+              "observed_default_rate": 0.23536165327210104,
+              "reference_group": false
+            },
+            {
+              "group": "3 years",
+              "rows": 1662,
+              "score_mean": 0.4563477176170209,
+              "favorable_share": 0.6131167268351384,
+              "disparate_impact": 0.8937790634623853,
+              "observed_default_rate": 0.2430806257521059,
+              "reference_group": false
+            },
+            {
+              "group": "unknown",
+              "rows": 1375,
+              "score_mean": 0.5219066326289168,
+              "favorable_share": 0.4421818181818182,
+              "disparate_impact": 0.6445964268088047,
+              "observed_default_rate": 0.30472727272727274,
+              "reference_group": false
+            },
+            {
+              "group": "1 year",
+              "rows": 1369,
+              "score_mean": 0.46412658416561936,
+              "favorable_share": 0.6011687363038715,
+              "disparate_impact": 0.8763617213480759,
+              "observed_default_rate": 0.25712198685171656,
+              "reference_group": false
+            },
+            {
+              "group": "4 years",
+              "rows": 1193,
+              "score_mean": 0.45850738404735203,
+              "favorable_share": 0.6186085498742665,
+              "disparate_impact": 0.9017848415430948,
+              "observed_default_rate": 0.22715842414082146,
+              "reference_group": false
+            },
+            {
+              "group": "5 years",
+              "rows": 1128,
+              "score_mean": 0.4377074669693371,
+              "favorable_share": 0.6684397163120568,
+              "disparate_impact": 0.974426887210171,
+              "observed_default_rate": 0.2393617021276596,
+              "reference_group": false
+            },
+            {
+              "group": "6 years",
+              "rows": 814,
+              "score_mean": 0.4430648973142857,
+              "favorable_share": 0.6388206388206388,
+              "disparate_impact": 0.931249283040814,
+              "observed_default_rate": 0.20884520884520885,
+              "reference_group": false
+            },
+            {
+              "group": "8 years",
+              "rows": 807,
+              "score_mean": 0.45279653689393035,
+              "favorable_share": 0.6369268897149938,
+              "disparate_impact": 0.9284886450937575,
+              "observed_default_rate": 0.23667905824039653,
+              "reference_group": false
+            },
+            {
+              "group": "9 years",
+              "rows": 694,
+              "score_mean": 0.4643972332002737,
+              "favorable_share": 0.6037463976945245,
+              "disparate_impact": 0.880119341525156,
+              "observed_default_rate": 0.19596541786743515,
+              "reference_group": false
+            },
+            {
+              "group": "7 years",
+              "rows": 667,
+              "score_mean": 0.4421540375943426,
+              "favorable_share": 0.6446776611694153,
+              "disparate_impact": 0.9397874352725918,
+              "observed_default_rate": 0.22488755622188905,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "emp_length",
+              "group": "unknown",
+              "reference_group": "10+ years",
+              "disparate_impact": 0.6445964268088047,
+              "rows": 1375,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "home_ownership",
+          "reference_group": "MORTGAGE",
+          "groups": [
+            {
+              "group": "MORTGAGE",
+              "rows": 9866,
+              "score_mean": 0.4094140804592561,
+              "favorable_share": 0.7156902493411716,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.18639772957632272,
+              "reference_group": true
+            },
+            {
+              "group": "RENT",
+              "rows": 7618,
+              "score_mean": 0.49819475601067686,
+              "favorable_share": 0.5311105276975584,
+              "disparate_impact": 0.7420955199354358,
+              "observed_default_rate": 0.2746127592543975,
+              "reference_group": false
+            },
+            {
+              "group": "OWN",
+              "rows": 2506,
+              "score_mean": 0.4528432683678877,
+              "favorable_share": 0.6400638467677574,
+              "disparate_impact": 0.8943308188940228,
+              "observed_default_rate": 0.22306464485235436,
+              "reference_group": false
+            },
+            {
+              "group": "ANY",
+              "rows": 10,
+              "score_mean": 0.4255903590718356,
+              "favorable_share": 0.7,
+              "disparate_impact": 0.9780767596657697,
+              "observed_default_rate": 0.1,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "home_ownership",
+              "group": "RENT",
+              "reference_group": "MORTGAGE",
+              "disparate_impact": 0.7420955199354358,
+              "rows": 7618,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "verification_status",
+          "reference_group": "Source Verified",
+          "groups": [
+            {
+              "group": "Source Verified",
+              "rows": 8270,
+              "score_mean": 0.458157564005048,
+              "favorable_share": 0.6347037484885127,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.23107617896009675,
+              "reference_group": true
+            },
+            {
+              "group": "Not Verified",
+              "rows": 6289,
+              "score_mean": 0.3868865162593912,
+              "favorable_share": 0.7576721259341708,
+              "disparate_impact": 1.1937413757812139,
+              "observed_default_rate": 0.1639370329146128,
+              "reference_group": false
+            },
+            {
+              "group": "Verified",
+              "rows": 5441,
+              "score_mean": 0.5057003764278521,
+              "favorable_share": 0.4969674692152178,
+              "disparate_impact": 0.7829912307886933,
+              "observed_default_rate": 0.28469031428046315,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "verification_status",
+              "group": "Verified",
+              "reference_group": "Source Verified",
+              "disparate_impact": 0.7829912307886933,
+              "rows": 5441,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "purpose",
+          "reference_group": "debt_consolidation",
+          "groups": [
+            {
+              "group": "debt_consolidation",
+              "rows": 11333,
+              "score_mean": 0.4668530771862539,
+              "favorable_share": 0.5991352686843731,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.23303626577252273,
+              "reference_group": true
+            },
+            {
+              "group": "credit_card",
+              "rows": 4053,
+              "score_mean": 0.40669217614806813,
+              "favorable_share": 0.7335307179866766,
+              "disparate_impact": 1.2243157035262158,
+              "observed_default_rate": 0.20157907722674562,
+              "reference_group": false
+            },
+            {
+              "group": "home_improvement",
+              "rows": 1483,
+              "score_mean": 0.40781556532213464,
+              "favorable_share": 0.7053270397842212,
+              "disparate_impact": 1.1772417292893342,
+              "observed_default_rate": 0.200944032366824,
+              "reference_group": false
+            },
+            {
+              "group": "other",
+              "rows": 1409,
+              "score_mean": 0.4576418295297817,
+              "favorable_share": 0.6202980837473385,
+              "disparate_impact": 1.0353222655535474,
+              "observed_default_rate": 0.22853087295954577,
+              "reference_group": false
+            },
+            {
+              "group": "major_purchase",
+              "rows": 511,
+              "score_mean": 0.41837060660367,
+              "favorable_share": 0.7103718199608611,
+              "disparate_impact": 1.1856618314604475,
+              "observed_default_rate": 0.23874755381604695,
+              "reference_group": false
+            },
+            {
+              "group": "medical",
+              "rows": 294,
+              "score_mean": 0.43304008581811765,
+              "favorable_share": 0.6564625850340136,
+              "disparate_impact": 1.0956834280103793,
+              "observed_default_rate": 0.18027210884353742,
+              "reference_group": false
+            },
+            {
+              "group": "car",
+              "rows": 231,
+              "score_mean": 0.3968940743477686,
+              "favorable_share": 0.7272727272727273,
+              "disparate_impact": 1.2138706654170572,
+              "observed_default_rate": 0.16883116883116883,
+              "reference_group": false
+            },
+            {
+              "group": "small_business",
+              "rows": 209,
+              "score_mean": 0.5955758927761541,
+              "favorable_share": 0.2727272727272727,
+              "disparate_impact": 0.45520149953139644,
+              "observed_default_rate": 0.3923444976076555,
+              "reference_group": false
+            },
+            {
+              "group": "moving",
+              "rows": 177,
+              "score_mean": 0.5146835916520578,
+              "favorable_share": 0.4463276836158192,
+              "disparate_impact": 0.7449531131690839,
+              "observed_default_rate": 0.2598870056497175,
+              "reference_group": false
+            },
+            {
+              "group": "vacation",
+              "rows": 153,
+              "score_mean": 0.42831934127349164,
+              "favorable_share": 0.6143790849673203,
+              "disparate_impact": 1.0254430294454553,
+              "observed_default_rate": 0.24836601307189543,
+              "reference_group": false
+            },
+            {
+              "group": "house",
+              "rows": 136,
+              "score_mean": 0.489086143123116,
+              "favorable_share": 0.5367647058823529,
+              "disparate_impact": 0.8958990297149788,
+              "observed_default_rate": 0.22794117647058823,
+              "reference_group": false
+            },
+            {
+              "group": "renewable_energy",
+              "rows": 11,
+              "score_mean": 0.4022127263020527,
+              "favorable_share": 0.7272727272727273,
+              "disparate_impact": 1.2138706654170572,
+              "observed_default_rate": 0.18181818181818182,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "purpose",
+              "group": "small_business",
+              "reference_group": "debt_consolidation",
+              "disparate_impact": 0.45520149953139644,
+              "rows": 209,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        },
+        {
+          "column": "application_type",
+          "reference_group": "Individual",
+          "groups": [
+            {
+              "group": "Individual",
+              "rows": 19097,
+              "score_mean": 0.44623007474792,
+              "favorable_share": 0.641880923705294,
+              "disparate_impact": 1.0,
+              "observed_default_rate": 0.22396187882913546,
+              "reference_group": true
+            },
+            {
+              "group": "Joint App",
+              "rows": 903,
+              "score_mean": 0.5005009587596605,
+              "favorable_share": 0.5094130675526024,
+              "disparate_impact": 0.7936254977200234,
+              "observed_default_rate": 0.2369878183831672,
+              "reference_group": false
+            }
+          ],
+          "signals": [
+            {
+              "column": "application_type",
+              "group": "Joint App",
+              "reference_group": "Individual",
+              "disparate_impact": 0.7936254977200234,
+              "rows": 903,
+              "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+            }
+          ]
+        }
+      ],
+      "signals": [
+        {
+          "column": "term",
+          "group": "60 months",
+          "reference_group": "36 months",
+          "disparate_impact": 0.18580904513271665,
+          "rows": 4455,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "emp_length",
+          "group": "unknown",
+          "reference_group": "10+ years",
+          "disparate_impact": 0.6445964268088047,
+          "rows": 1375,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "home_ownership",
+          "group": "RENT",
+          "reference_group": "MORTGAGE",
+          "disparate_impact": 0.7420955199354358,
+          "rows": 7618,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "verification_status",
+          "group": "Verified",
+          "reference_group": "Source Verified",
+          "disparate_impact": 0.7829912307886933,
+          "rows": 5441,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "purpose",
+          "group": "small_business",
+          "reference_group": "debt_consolidation",
+          "disparate_impact": 0.45520149953139644,
+          "rows": 209,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        },
+        {
+          "column": "application_type",
+          "group": "Joint App",
+          "reference_group": "Individual",
+          "disparate_impact": 0.7936254977200234,
+          "rows": 903,
+          "meaning": "Sinal de monitoramento: a massa de score abaixo do corte ficou abaixo de quatro quintos do grupo de maior volume. Nao e prova de discriminacao."
+        }
+      ],
+      "mitigation": [
+        "Sexo, raca, idade, religiao, biometria, CEP e UF nao entram no modelo.",
+        "addr_state ficou de fora. Nao volta nesta etapa: o ganho de AUC nao justifica o proxy geografico.",
+        "O baseline nao tem limiar. Qualquer corte de concessao e politica, com revisao humana.",
+        "class_weight balanced melhora o ranking da classe rara. Nao e tecnica de equidade.",
+        "FICO e renda podem carregar vies historico. Excluir a UF nao remove esse residuo.",
+        "O recorte e recalculado na referencia e na producao natural. Sinal novo na producao vira item de revisao, nao bloqueio automatico do cliente."
+      ]
+    }
+  },
+  "causal_analysis": {
+    "question": "O que causou o alerta: dado invalido, intervencao nas features, ou mudanca da relacao entre score e default?",
+    "invalid_data": "Nao. O contrato ja tirou o impossivel. FICO menor e DTI maior, dentro da faixa, sao dados validos.",
+    "intervention": {
+      "design": "mesmas linhas, intervencao conhecida em fico_range_low e dti",
+      "intervened_columns": [
+        "fico_range_low",
+        "dti"
+      ],
+      "score_mean_before": 0.4486804051610501,
+      "score_mean_after": 0.607035912745099,
+      "score_mean_delta": 0.15835550758404893,
+      "score_psi": 0.7912195806996146,
+      "label_rate_delta": 0.0,
+      "claim": "O prediction drift deste contraste e causado pela queda de FICO e pela alta de DTI. O rotulo nao mudou, entao o contraste nao e concept drift.",
+      "not_claimed": "A intervencao nao explica a janela real de 2016-2018."
+    },
+    "observational_window": {
+      "contrast": "referencia 2012-2015 contra producao natural 2016-2018",
+      "default_rate_reference": 0.1846,
+      "default_rate_natural": 0.22455,
+      "kitagawa": {
+        "method": "kitagawa",
+        "bands": [
+          {
+            "band": "(-0.001, 0.312]",
+            "weight_reference": 0.2,
+            "weight_current": 0.21965,
+            "rate_reference": 0.0660625,
+            "rate_current": 0.08217618939221488,
+            "composition_effect": 0.0012981281249999999,
+            "rate_effect": 0.003539371875
+          },
+          {
+            "band": "(0.312, 0.406]",
+            "weight_reference": 0.2,
+            "weight_current": 0.20265,
+            "rate_reference": 0.1110625,
+            "rate_current": 0.16308906982482113,
+            "composition_effect": 0.0002943156249999984,
+            "rate_effect": 0.010543184375000004
+          },
+          {
+            "band": "(0.406, 0.494]",
+            "weight_reference": 0.2,
+            "weight_current": 0.20015,
+            "rate_reference": 0.1575,
+            "rate_current": 0.2305770671996003,
+            "composition_effect": 2.36249999999974e-05,
+            "rate_effect": 0.014626375
+          },
+          {
+            "band": "(0.494, 0.616]",
+            "weight_reference": 0.2,
+            "weight_current": 0.20075,
+            "rate_reference": 0.2211875,
+            "rate_current": 0.2876712328767123,
+            "composition_effect": 0.00016589062500000016,
+            "rate_effect": 0.013346609374999995
+          },
+          {
+            "band": "(0.616, 1.0]",
+            "weight_reference": 0.2,
+            "weight_current": 0.1768,
+            "rate_reference": 0.3671875,
+            "rate_current": 0.39338235294117646,
+            "composition_effect": -0.008518749999999999,
+            "rate_effect": 0.004631249999999998
+          }
+        ],
+        "observed_delta": 0.03995000000000001,
+        "composition_effect": -0.006736790625000003,
+        "rate_effect": 0.046686790624999995,
+        "residual": 2.0816681711721685e-17,
+        "reading": "Efeito de taxa e mudanca de P(Y|faixa de score): o sinal de concept drift. Efeito de composicao e migracao entre faixas. Nenhum dos dois nomeia a causa externa."
+      },
+      "application_type_mix": {
+        "reference_rate": 0.1846,
+        "current_rate": 0.22455,
+        "current_rate_at_reference_mix": 0.22396871744740132,
+        "gap_if_mix_unchanged": 0.039368717447401336,
+        "reading": "Se o gap padronizado continua perto do gap observado, a troca de mix dessa categoria nao explica a alta do default."
+      },
+      "claim": "Da para localizar o aumento do default na taxa dentro da faixa de score. Nao da para apontar um unico fator externo como causa."
+    },
+    "hypotheses_not_identified": [
+      "Cenario de credito mais duro entre 2016 e 2018.",
+      "Mudanca de politica de concessao do Lending Club, nao observada nestas colunas.",
+      "Mix de application_type, testado a parte e nao tratado como causa enquanto o gap padronizado continuar.",
+      "revol_util no limite do PSI moderado. Associacao, nao mecanismo identificado."
+    ]
+  }
+}

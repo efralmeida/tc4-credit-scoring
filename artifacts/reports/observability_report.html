@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Observabilidade do credit scoring</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 2rem auto; max-width: 1080px; color: #1c1917; background: #faf7f2; }
+    h1, h2 { font-weight: 600; }
+    .cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; }
+    .card { background: white; border: 1px solid #e7e5e4; padding: 0.8rem; }
+    .card span { display: block; font-size: 0.8rem; color: #57534e; }
+    .card strong { font-size: 1.3rem; }
+    table { width: 100%; border-collapse: collapse; background: white; font-size: 0.92rem; }
+    th, td { border-bottom: 1px solid #e7e5e4; text-align: left; padding: 0.35rem 0.4rem; }
+    .alert { background: #fff7ed; border-left: 4px solid #c2410c; padding: 0.6rem 1rem; }
+    .note { color: #44403c; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Saude operacional do modelo</h1>
+  <p class="note">Lotes de scoring sem identificador e sem payload rejeitado. O limiar de concessao continua fora do baseline. PSI abaixo de 0,10 e estavel; a partir de 0,25 o lote pagina. O KS nao e a regra de alerta.</p>
+  <section class="cards"><div class='card'><span>Predicoes aceitas</span><strong>22.028</strong></div><div class='card'><span>Taxa de erro</span><strong>0,05%</strong></div><div class='card'><span>Celulas nulas</span><strong>0,00%</strong></div><div class='card'><span>Latencia media</span><strong>0,108</strong></div><div class='card'><span>Alertas de drift</span><strong>2</strong></div></section>
+  <h2>Alertas</h2>
+  <div class="alert"><ul><li><strong>null_rate.</strong> Ha celulas nulas nas colunas do contrato antes da rejeicao.</li><li><strong>error_rate.</strong> O contrato rejeitou pelo menos uma linha. O payload nao foi gravado.</li><li><strong>drift.</strong> PSI relevante em FICO, DTI ou score. Confirmar na amostra inteira.</li></ul></div>
+  <h2>Lotes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Lote</th><th>Tipo</th><th>Aceitas</th><th>Rejeitadas</th>
+        <th>Nulos</th><th>ms/linha</th><th>Score medio</th><th>Drift</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>2016-01</td><td>scheduled</td><td>1126</td><td>0</td><td>0,00%</td><td>0,067</td><td>0,437</td><td>estavel</td></tr>
+<tr><td>2016-02</td><td>scheduled</td><td>1292</td><td>0</td><td>0,00%</td><td>0,041</td><td>0,444</td><td>estavel</td></tr>
+<tr><td>2016-03</td><td>scheduled</td><td>1936</td><td>0</td><td>0,00%</td><td>0,029</td><td>0,453</td><td>estavel</td></tr>
+<tr><td>2016-04</td><td>scheduled</td><td>934</td><td>0</td><td>0,00%</td><td>0,069</td><td>0,455</td><td>estavel</td></tr>
+<tr><td>2016-05</td><td>scheduled</td><td>705</td><td>0</td><td>0,00%</td><td>0,077</td><td>0,467</td><td>estavel</td></tr>
+<tr><td>2016-06</td><td>scheduled</td><td>780</td><td>0</td><td>0,00%</td><td>0,116</td><td>0,449</td><td>estavel</td></tr>
+<tr><td>2016-07</td><td>scheduled</td><td>878</td><td>0</td><td>0,00%</td><td>0,056</td><td>0,464</td><td>estavel</td></tr>
+<tr><td>2016-08</td><td>scheduled</td><td>843</td><td>0</td><td>0,00%</td><td>0,087</td><td>0,454</td><td>estavel</td></tr>
+<tr><td>2016-09</td><td>scheduled</td><td>653</td><td>0</td><td>0,00%</td><td>0,088</td><td>0,444</td><td>estavel</td></tr>
+<tr><td>2016-10</td><td>scheduled</td><td>709</td><td>0</td><td>0,00%</td><td>0,087</td><td>0,453</td><td>estavel</td></tr>
+<tr><td>2016-11</td><td>scheduled</td><td>761</td><td>0</td><td>0,00%</td><td>0,063</td><td>0,455</td><td>estavel</td></tr>
+<tr><td>2016-12</td><td>scheduled</td><td>776</td><td>0</td><td>0,00%</td><td>0,065</td><td>0,462</td><td>estavel</td></tr>
+<tr><td>2017-01</td><td>scheduled</td><td>673</td><td>0</td><td>0,00%</td><td>0,087</td><td>0,449</td><td>estavel</td></tr>
+<tr><td>2017-02</td><td>scheduled</td><td>515</td><td>0</td><td>0,00%</td><td>0,184</td><td>0,454</td><td>estavel</td></tr>
+<tr><td>2017-03</td><td>scheduled</td><td>640</td><td>0</td><td>0,00%</td><td>0,075</td><td>0,460</td><td>estavel</td></tr>
+<tr><td>2017-04</td><td>scheduled</td><td>543</td><td>0</td><td>0,00%</td><td>0,112</td><td>0,446</td><td>estavel</td></tr>
+<tr><td>2017-05</td><td>scheduled</td><td>611</td><td>0</td><td>0,00%</td><td>0,086</td><td>0,459</td><td>estavel</td></tr>
+<tr><td>2017-06</td><td>scheduled</td><td>593</td><td>0</td><td>0,00%</td><td>0,193</td><td>0,448</td><td>estavel</td></tr>
+<tr><td>2017-07</td><td>scheduled</td><td>558</td><td>0</td><td>0,00%</td><td>0,109</td><td>0,458</td><td>estavel</td></tr>
+<tr><td>2017-08</td><td>scheduled</td><td>606</td><td>0</td><td>0,00%</td><td>0,088</td><td>0,443</td><td>estavel</td></tr>
+<tr><td>2017-09</td><td>scheduled</td><td>515</td><td>0</td><td>0,00%</td><td>0,109</td><td>0,455</td><td>estavel</td></tr>
+<tr><td>2017-10</td><td>scheduled</td><td>477</td><td>0</td><td>0,00%</td><td>0,158</td><td>0,434</td><td>estavel</td></tr>
+<tr><td>2017-11</td><td>scheduled</td><td>445</td><td>0</td><td>0,00%</td><td>0,111</td><td>0,440</td><td>estavel</td></tr>
+<tr><td>2017-12</td><td>scheduled</td><td>349</td><td>0</td><td>0,00%</td><td>0,214</td><td>0,451</td><td>estavel</td></tr>
+<tr><td>2018-01</td><td>scheduled</td><td>288</td><td>0</td><td>0,00%</td><td>0,185</td><td>0,431</td><td>estavel</td></tr>
+<tr><td>2018-02</td><td>scheduled</td><td>258</td><td>0</td><td>0,00%</td><td>0,291</td><td>0,437</td><td>estavel</td></tr>
+<tr><td>2018-03</td><td>scheduled</td><td>260</td><td>0</td><td>0,00%</td><td>0,227</td><td>0,419</td><td>pagina, nao confirma: fico_range_low</td></tr>
+<tr><td>2018-04</td><td>scheduled</td><td>270</td><td>0</td><td>0,00%</td><td>0,203</td><td>0,436</td><td>estavel</td></tr>
+<tr><td>2018-05</td><td>scheduled</td><td>240</td><td>0</td><td>0,00%</td><td>0,173</td><td>0,406</td><td>estavel</td></tr>
+<tr><td>2018-06</td><td>scheduled</td><td>167</td><td>0</td><td>0,00%</td><td>0,340</td><td>0,410</td><td>nao avaliado</td></tr>
+<tr><td>2018-07</td><td>scheduled</td><td>175</td><td>0</td><td>0,00%</td><td>0,475</td><td>0,437</td><td>nao avaliado</td></tr>
+<tr><td>2018-08</td><td>scheduled</td><td>145</td><td>0</td><td>0,00%</td><td>0,400</td><td>0,438</td><td>nao avaliado</td></tr>
+<tr><td>2018-09</td><td>scheduled</td><td>93</td><td>0</td><td>0,00%</td><td>0,570</td><td>0,443</td><td>nao avaliado</td></tr>
+<tr><td>2018-10</td><td>scheduled</td><td>74</td><td>0</td><td>0,00%</td><td>0,702</td><td>0,393</td><td>nao avaliado</td></tr>
+<tr><td>2018-11</td><td>scheduled</td><td>60</td><td>0</td><td>0,00%</td><td>0,920</td><td>0,388</td><td>nao avaliado</td></tr>
+<tr><td>2018-12</td><td>scheduled</td><td>52</td><td>0</td><td>0,00%</td><td>1,622</td><td>0,427</td><td>nao avaliado</td></tr>
+<tr><td>probe-contract</td><td>contract_probe</td><td>28</td><td>12</td><td>1,05%</td><td>2,054</td><td>0,461</td><td>nao avaliado</td></tr>
+<tr><td>incident-fico-dti</td><td>incident</td><td>2000</td><td>0</td><td>0,00%</td><td>0,031</td><td>0,610</td><td>confirmado: default_probability, dti, fico_range_low</td></tr>
+    </tbody>
+  </table>
+  <h2>Drift confirmatorio, amostra inteira</h2>
+  <p class="note">O PSI do lote mensal oscila. A confirmacao usa a mesma definicao da etapa 2, na amostra completa, nao um p-valor.</p>
+  <h3>referencia contra producao natural</h3><p class='note'>Colunas fora da faixa estavel: application_type, revol_util. PSI do score: 0,006 (stable).</p><table><thead><tr><th>Coluna</th><th>PSI</th><th>Faixa</th></tr></thead><tbody><tr><td>application_type</td><td>0,201</td><td>moderate</td></tr>
+<tr><td>revol_util</td><td>0,102</td><td>moderate</td></tr>
+<tr><td>default_probability</td><td>0,006</td><td>stable</td></tr></tbody></table>
+<h3>referencia contra producao deslocada</h3><p class='note'>Colunas fora da faixa estavel: fico_range_low, dti, default_probability, application_type, revol_util. PSI do score: 0,681 (significant).</p><table><thead><tr><th>Coluna</th><th>PSI</th><th>Faixa</th></tr></thead><tbody><tr><td>fico_range_low</td><td>1,600</td><td>significant</td></tr>
+<tr><td>dti</td><td>0,887</td><td>significant</td></tr>
+<tr><td>default_probability</td><td>0,681</td><td>significant</td></tr>
+<tr><td>application_type</td><td>0,201</td><td>moderate</td></tr>
+<tr><td>revol_util</td><td>0,102</td><td>moderate</td></tr></tbody></table>
+  <p class="note">Gerado em 2026-10-28T22:24:42.233383+00:00. Features e identificadores nao foram gravados neste relatorio.</p>
+</body>
+</html>
