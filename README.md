@@ -4,54 +4,54 @@ Camada de sustentação de um modelo de credit scoring. A etapa 1 impede que dad
 
 O dataset didático é o Lending Club, público e americano. O mapeamento de LGPD descreve o controle que a fintech do enunciado precisaria. Não cria titular brasileiro neste arquivo e não torna o aluno controlador dessa base.
 
-## Decisao de dados
+## Decisão de dados
 
-Fonte local: `data/raw/accepted_2007_to_2018Q4.csv.gz` (Lending Club, classificacao binaria, volume acima de 5.000 registros).
+Fonte local: `data/raw/accepted_2007_to_2018Q4.csv.gz` (Lending Club, classificação binária, volume acima de 5.000 registros).
 
-A base de referencia usa emprestimos originados entre janeiro de 2012 e dezembro de 2015 com desfecho terminal (`Fully Paid` ou `Charged Off`). Originacoes a partir de 2016 ficam reservadas para a simulacao de producao da etapa 2.
+A base de referência usa empréstimos originados entre janeiro de 2012 e dezembro de 2015 com desfecho terminal (`Fully Paid` ou `Charged Off`). Originações a partir de 2016 ficam reservadas para a simulação de produção da etapa 2.
 
-A amostra final tem ate 80.000 linhas, estratificada por desfecho e reproduzivel com `random_state=42`. A fracao por bloco existe apenas para limitar memoria durante a leitura do arquivo bruto.
+A amostra final tem até 80.000 linhas, estratificada por desfecho e reproduzível com `random_state=42`. A fração por bloco existe apenas para limitar memória durante a leitura do arquivo bruto.
 
 Classe positiva: `Charged Off`.
 
-### O que nao entra no modelo
+### O que não entra no modelo
 
-| Motivo | Colunas excluidas |
+| Motivo | Colunas excluídas |
 | --- | --- |
-| Minimizacao LGPD | `id`, `member_id`, `emp_title`, `url`, `desc`, `title`, `zip_code`, `addr_state` |
-| Vazamento de alvo | `int_rate`, `installment`, `grade`, `sub_grade` e qualquer campo de pagamento, recuperacao ou FICO posterior |
-| Metadado, nao feature | `issue_d` permanece na referencia para separar janelas, mas nao entra na inferencia |
+| Minimização LGPD | `id`, `member_id`, `emp_title`, `url`, `desc`, `title`, `zip_code`, `addr_state` |
+| Vazamento de alvo | `int_rate`, `installment`, `grade`, `sub_grade` e qualquer campo de pagamento, recuperação ou FICO posterior |
+| Metadado, não feature | `issue_d` permanece na referência para separar janelas, mas não entra na inferência |
 
 `addr_state` fica de fora por minimização e por ser um proxy geográfico. A etapa 4 não o traz de volta: o ganho eventual de AUC não justifica o proxy.
 
-Ausencia de `emp_length` vira a categoria explicita `unknown`. Nulo em renda, DTI, FICO ou utilizacao rotativa continua sendo falha de contrato.
+Ausência de `emp_length` vira a categoria explícita `unknown`. Nulo em renda, DTI, FICO ou utilização rotativa continua sendo falha de contrato.
 
 ## Contrato de dados
 
-O contrato de scoring esta em [src/credit_scoring/data/schema.py](src/credit_scoring/data/schema.py). Ele e estrito: coluna extra, inclusive identificador, e rejeitada.
+O contrato de scoring está em [src/credit_scoring/data/schema.py](src/credit_scoring/data/schema.py). Ele é estrito: coluna extra, inclusive identificador, é rejeitada.
 
-Regras rigidas destacadas:
+Regras rígidas destacadas:
 
-1. Renda anual estritamente positiva e ate o teto de sanidade de 1.000.000.
-2. DTI no intervalo fechado [0, 100], o que rejeita o sentinela historico 999.
+1. Renda anual estritamente positiva e até o teto de sanidade de 1.000.000.
+2. DTI no intervalo fechado [0, 100], o que rejeita o sentinela histórico 999.
 3. `term` restrito a `36 months` e `60 months`.
 4. Schema estrito, sem colunas fora do contrato.
 5. `total_acc` maior ou igual a `open_acc`.
-6. FICO, valor do emprestimo e demais numericos dentro de faixas de sanidade, sem nulos.
+6. FICO, valor do empréstimo e demais numéricos dentro de faixas de sanidade, sem nulos.
 
-Essas faixas separam erro de dados de politica de credito. O baseline nao define limiar de aprovacao. Esse limiar e uma decisao de governanca.
+Essas faixas separam erro de dados de política de crédito. O baseline não define limiar de aprovação. Esse limiar é uma decisão de governança.
 
-O treino usa um segundo contrato, de referencia. Ele repete as regras de scoring e ainda exige desfecho terminal e `issue_d` dentro de 2012–2015. No treino nao ha quarentena: se a referencia vier adulterada, o ajuste e interrompido. Na preparacao, linhas invalidas sao contadas e descartadas; o payload rejeitado nao e gravado.
+O treino usa um segundo contrato, de referência. Ele repete as regras de scoring e ainda exige desfecho terminal e `issue_d` dentro de 2012–2015. No treino não há quarentena: se a referência vier adulterada, o ajuste é interrompido. Na preparação, linhas inválidas são contadas e descartadas; o payload rejeitado não é gravado.
 
 ## Modelo baseline
 
-Regressao logistica do scikit-learn, com `class_weight="balanced"`, padronizacao das variaveis numericas e one-hot das categoricas. A entrada passa pelo contrato antes de `predict_proba`.
+Regressão logística do scikit-learn, com `class_weight="balanced"`, padronização das variáveis numéricas e one-hot das categóricas. A entrada passa pelo contrato antes de `predict_proba`.
 
-Metricas de holdout estratificado (20%): ROC-AUC, average precision, KS de credito e Brier. O KS aqui e a maior distancia absoluta entre as curvas acumuladas de verdadeiros e falsos positivos. Nao e um p-valor e nao substitui o teste de drift da etapa 2.
+Métricas de holdout estratificado (20%): ROC-AUC, average precision, KS de crédito e Brier. O KS aqui é a maior distância absoluta entre as curvas acumuladas de verdadeiros e falsos positivos. Não é um p-valor e não substitui o teste de drift da etapa 2.
 
-Resultado obtido nesta execucao, sem `grade` e sem `int_rate`:
+Resultado obtido nesta execução, sem `grade` e sem `int_rate`:
 
-| Metrica | Valor |
+| Métrica | Valor |
 | --- | --- |
 | ROC-AUC | 0,697 |
 | Average precision | 0,347 |
@@ -59,7 +59,7 @@ Resultado obtido nesta execucao, sem `grade` e sem `int_rate`:
 | Brier | 0,219 |
 | Taxa de Charged Off no teste | 18,5% |
 
-A quarentena da preparacao leu 2.260.701 linhas, encontrou 786.818 emprestimos terminais na janela e rejeitou 1.611 linhas da amostra candidata antes de fixar a referencia em 80.000 registros (65.232 Fully Paid e 14.768 Charged Off).
+A quarentena da preparação leu 2.260.701 linhas, encontrou 786.818 empréstimos terminais na janela e rejeitou 1.611 linhas da amostra candidata antes de fixar a referência em 80.000 registros (65.232 Fully Paid e 14.768 Charged Off).
 
 ## Como executar
 
@@ -76,16 +76,16 @@ Comandos parciais da etapa 1: `prepare`, `train` e `demonstrate-failure`. Na eta
 
 Artefatos gerados:
 
-| Caminho | Conteudo |
+| Caminho | Conteúdo |
 | --- | --- |
-| `data/processed/reference_sample.csv` | Amostra de referencia. Fica fora do Git porque `data/` esta ignorado. |
+| `data/processed/reference_sample.csv` | Amostra de referência. Fica fora do Git porque `data/` está ignorado. |
 | `artifacts/models/credit_baseline.joblib` | Pipeline treinado e metadados. |
-| `artifacts/reports/baseline_metrics.json` | Metricas de holdout. |
+| `artifacts/reports/baseline_metrics.json` | Métricas de holdout. |
 | `artifacts/reports/baseline_coefficients.csv` | Coeficientes agregados, sem dados de cliente. |
 | `artifacts/reports/preparation_report.json` | Contagens da quarentena. |
 | `artifacts/reports/contract_failure_report.json` | Prova da falha controlada. |
 
-A falha controlada cobre DTI 999, renda nao positiva, prazo fora do dominio, FICO nulo, contas incoerentes e uma coluna `zip_code`. Um caso valido precisa passar, para mostrar que o contrato nao rejeita tudo.
+A falha controlada cobre DTI 999, renda não positiva, prazo fora do domínio, FICO nulo, contas incoerentes e uma coluna `zip_code`. Um caso válido precisa passar, para mostrar que o contrato não rejeita tudo.
 
 ## Privacidade desde a etapa 1
 
@@ -93,46 +93,46 @@ Não há identificador direto no dataset de modelagem, no modelo ou nos relatór
 
 ## Etapa 2 — drift
 
-Contrato e drift respondem perguntas diferentes. O Pandera barra dado impossivel, como DTI 999. O monitor de drift olha dado possivel cuja distribuicao se afastou do treino.
+Contrato e drift respondem perguntas diferentes. O Pandera barra dado impossível, como DTI 999. O monitor de drift olha dado possível cuja distribuição se afastou do treino.
 
-A referencia continua sendo 2012-2015. A producao natural usa originacoes terminais de 2016-2018, lidas do mesmo arquivo bruto e sem identificadores. Sobre essa amostra, duas variaveis sao alteradas de proposito:
+A referência continua sendo 2012-2015. A produção natural usa originações terminais de 2016-2018, lidas do mesmo arquivo bruto e sem identificadores. Sobre essa amostra, duas variáveis são alteradas de propósito:
 
-| Variavel | Alteracao | Leitura de negocio |
+| Variável | Alteração | Leitura de negócio |
 | --- | --- | --- |
-| `fico_range_low` | queda de 40 pontos, limitada a [300, 850] | perfil de credito pior |
+| `fico_range_low` | queda de 40 pontos, limitada a [300, 850] | perfil de crédito pior |
 | `dti` | multiplicado por 1,35 e somado a 4, limitado a [0, 100] | mais comprometimento de renda |
 
-O clip existe para o drift nao virar falha de contrato. O baseline pontua os tres conjuntos, mas nao recebe `issue_d` nem `loan_status`.
+O clip existe para o drift não virar falha de contrato. O baseline pontua os três conjuntos, mas não recebe `issue_d` nem `loan_status`.
 
-### Evidencia estatistica
+### Evidência estatística
 
 | Teste | O que compara | Como ler |
 | --- | --- | --- |
-| PSI | Proporcao por faixa, numerica ou categorica | Abaixo de 0,10: estavel. De 0,10 a 0,25: moderado. A partir de 0,25: relevante. Nao e p-valor. |
-| KS de duas amostras | Distribuicao continua de referencia contra producao | p-valor abaixo de 0,05 rejeita a hipotese de mesma distribuicao. Com dezenas de milhares de linhas, rejeita diferenca pequena. Nao e o KS de credito do baseline. |
-| Qui-quadrado | Frequencia das categorias | Equivalente categorico do KS, com a mesma ressalva de amostra grande. |
+| PSI | Proporção por faixa, numérica ou categórica | Abaixo de 0,10: estável. De 0,10 a 0,25: moderado. A partir de 0,25: relevante. Não é p-valor. |
+| KS de duas amostras | Distribuição contínua de referência contra produção | p-valor abaixo de 0,05 rejeita a hipótese de mesma distribuição. Com dezenas de milhares de linhas, rejeita diferença pequena. Não é o KS de crédito do baseline. |
+| Qui-quadrado | Frequência das categorias | Equivalente categórico do KS, com a mesma ressalva de amostra grande. |
 
-O alerta operacional usa o PSI. KS e qui-quadrado ficam no JSON como apoio. O Evidently, acima de mil linhas, trocaria o KS pelo Wasserstein; o HTML foi fixado em PSI para a evidencia visual coincidir com o teste de credito.
+O alerta operacional usa o PSI. KS e qui-quadrado ficam no JSON como apoio. O Evidently, acima de mil linhas, trocaria o KS pelo Wasserstein; o HTML foi fixado em PSI para a evidência visual coincidir com o teste de crédito.
 
-Ha dois relatorios porque as perguntas sao diferentes:
+Há dois relatórios porque as perguntas são diferentes:
 
-- `drift_report.html`: referencia contra producao deslocada. E o monitor de producao.
-- `drift_injection_report.html`: producao natural contra producao deslocada. Isola FICO e DTI da passagem do tempo.
+- `drift_report.html`: referência contra produção deslocada. É o monitor de produção.
+- `drift_injection_report.html`: produção natural contra produção deslocada. Isola FICO e DTI da passagem do tempo.
 
-Concept drift nao e lido na amostra injetada. Ele e a taxa de Charged Off dentro da mesma faixa de score, comparando referencia e producao natural. Mudar FICO e manter o rotulo antigo moveria o score de faixa; isso seria migracao, nao P(Y|X).
+Concept drift não é lido na amostra injetada. Ele é a taxa de Charged Off dentro da mesma faixa de score, comparando referência e produção natural. Mudar FICO e manter o rótulo antigo moveria o score de faixa; isso seria migração, não P(Y|X).
 
 ```powershell
 poetry run python scripts/run_stage2.py
 ```
 
-`simulate` so gera os CSV. `detect` so gera os relatorios, e exige a simulacao anterior. `--from-reference` nao relê o bruto: reposiciona a referencia em 2016-2018 e deixa explicito que o drift natural da janela real nao aparece.
+`simulate` só gera os CSV. `detect` só gera os relatórios, e exige a simulação anterior. `--from-reference` não relê o bruto: reposiciona a referência em 2016-2018 e deixa explícito que o drift natural da janela real não aparece.
 
-| Caminho | Conteudo |
+| Caminho | Conteúdo |
 | --- | --- |
-| `data/processed/production_natural.csv` | Producao 2016-2018, fora do Git. |
+| `data/processed/production_natural.csv` | Produção 2016-2018, fora do Git. |
 | `data/processed/production_drifted.csv` | A mesma amostra, com FICO e DTI deslocados. |
-| `artifacts/reports/drift_report.html` | Evidently: referencia contra producao deslocada. |
-| `artifacts/reports/drift_injection_report.html` | Evidently: prova das duas variaveis injetadas. |
+| `artifacts/reports/drift_report.html` | Evidently: referência contra produção deslocada. |
+| `artifacts/reports/drift_injection_report.html` | Evidently: prova das duas variáveis injetadas. |
 | `artifacts/reports/drift_summary.json` | PSI, KS, qui-quadrado, scores agregados e concept drift. |
 | `artifacts/logs/batch_health.jsonl` | Log agregado de lote: volume, nulos, latência, erro e PSI. |
 | `artifacts/logs/prediction_events.jsonl` | Evento de predição, só com faixa de score. Fora do Git. |
@@ -141,23 +141,23 @@ poetry run python scripts/run_stage2.py
 | `artifacts/reports/governance_report.json` | Catálogo, retenção, viés e análise causal. |
 | `artifacts/reports/governance_report.html` | Página para mostrar a etapa 4. |
 
-Os HTML nao guardam identificador. O JSON nao guarda score por cliente. Amostra de linha do Evidently, se o HTML a embutir, continua restrita as features ja minimizadas e nao deve ser publicada fora do artefato local.
+Os HTML não guardam identificador. O JSON não guarda score por cliente. Amostra de linha do Evidently, se o HTML a embutir, continua restrita às features já minimizadas e não deve ser publicada fora do artefato local.
 
-### Resultado desta execucao
+### Resultado desta execução
 
-A leitura do bruto encontrou 518.706 emprestimos terminais em 2016-2018. O contrato rejeitou 309 linhas da amostra candidata. A producao ficou com 20.000 linhas.
+A leitura do bruto encontrou 518.706 empréstimos terminais em 2016-2018. O contrato rejeitou 309 linhas da amostra candidata. A produção ficou com 20.000 linhas.
 
-| Comparacao | O que apareceu |
+| Comparação | O que apareceu |
 | --- | --- |
-| Injecao, producao natural contra deslocada | So `fico_range_low` (PSI 1,65) e `dti` (PSI 0,85). Nenhuma outra coluna passou de 0,10. |
-| Score, referencia contra producao natural | PSI 0,006. A passagem do tempo, sozinha, nao moveu a probabilidade prevista. |
-| Score, referencia contra producao deslocada | PSI 0,68. A media do score foi de 0,449 para 0,607. |
+| Injeção, produção natural contra deslocada | Só `fico_range_low` (PSI 1,65) e `dti` (PSI 0,85). Nenhuma outra coluna passou de 0,10. |
+| Score, referência contra produção natural | PSI 0,006. A passagem do tempo, sozinha, não moveu a probabilidade prevista. |
+| Score, referência contra produção deslocada | PSI 0,68. A média do score foi de 0,449 para 0,607. |
 | Passagem do tempo nas features | `application_type` ficou moderado (PSI 0,20) e `revol_util` no limite (PSI 0,10). |
-| KS em `loan_amnt` | p-valor minusculo com PSI 0,02. Por isso o alerta nao usa so o KS. |
+| KS em `loan_amnt` | p-valor minúsculo com PSI 0,02. Por isso o alerta não usa só o KS. |
 
-A taxa observada de Charged Off foi de 18,5% na referencia para 22,5% na producao natural. O gap de calibracao, na mesma faixa de score, ficou em 4,7 pontos percentuais. Isso e o sinal de concept drift: o rotulo mudou mais do que o score. A injecao nao altera esse rotulo; ela so empurra o score.
+A taxa observada de Charged Off foi de 18,5% na referência para 22,5% na produção natural. O gap de calibração, na mesma faixa de score, ficou em 4,7 pontos percentuais. Isso é o sinal de concept drift: o rótulo mudou mais do que o score. A injeção não altera esse rótulo; ela só empurra o score.
 
-O score medio perto de 0,46 nao e a taxa de inadimplencia. A regressao logistica usa `class_weight="balanced"`, entao a probabilidade nao esta calibrada para a frequencia real. O limiar de concessao continua fora do baseline.
+O score médio perto de 0,46 não é a taxa de inadimplência. A regressão logística usa `class_weight="balanced"`, então a probabilidade não está calibrada para a frequência real. O limiar de concessão continua fora do baseline.
 
 
 ## Etapa 3 — observabilidade
@@ -242,7 +242,7 @@ O que já foi feito: atributos protegidos e proxy geográfico fora; linha rejeit
 
 ### Análise causal
 
-Há dois contrastes. Eles não respondem a mesma pergunta.
+Há dois contrastes. Eles não respondem à mesma pergunta.
 
 A injeção é intervenção nas mesmas linhas. FICO cai 40 pontos e o DTI sobe. O rótulo não muda. O score médio vai de 0,449 para 0,607 e o PSI do score, natural contra deslocada, fica em 0,79. Isso causa o prediction drift do incidente. Não é concept drift. Também não explica 2016–2018.
 
@@ -263,11 +263,3 @@ poetry run python scripts/run_stage4.py
 ```
 
 Abrir `artifacts/reports/governance_report.html` e `artifacts/reports/governance_report.json`.
-
-## Vídeo STAR
-
-O roteiro completo está em `pauta.md`, que fica fora do Git porque é nota de gravação. O link do vídeo entra aqui quando a gravação estiver publicada:
-
-[link do vídeo](COLOQUE_O_LINK_AQUI)
-
-Situação: o modelo responde, o dado pode ser válido, e a população pode ter deixado de ser a do treino. Tarefa: separar dado inválido, data drift, prediction drift e concept drift, e dizer o que a LGPD permite tratar. Ação: contrato Pandera, baseline sem limiar, PSI como alerta, log sem identificador, decomposição de Kitagawa. Resultado: o incidente de FICO e DTI causa o movimento do score; a janela real muda o default dentro da mesma faixa de score, e o mix de `application_type` não explica essa alta.
